@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "chartName" . }}-deployment
+  labels:
+    app: {{ include "chartName" . }}-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ include "chartName" . }}-pod
+  template:
+    metadata:
+      labels:
+        app: {{ include "chartName" . }}-pod
+    spec:
+      containers:
+      - name: {{ include "chartName" . }}
+        image: {{ include "repo" . }}
+        env: 
+          - name: "ENV"
+            value: {{ include "golangEnv" . }}
+        imagePullPolicy: Always
+        ports:
+        - name: {{ .Values.containerPortName }}
+          containerPort: {{ .Values.containerPort }}

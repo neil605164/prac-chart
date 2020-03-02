@@ -1,0 +1,17 @@
+{{- println "======Success=========" -}}
+
+{{ $env := required "env required" .Values.env }}
+{{- if and .Values.dev (eq $env "develop") }}
+  Image Repo: {{ include "repo" . }}
+  Chart Name: {{ include "chartName" . }}
+  ENV: {{ include "golangEnv" . }}
+{{- end }}
+
+{{- if and .Values.qa (eq $env "qatest") }}
+  Image Repo: {{ include "repo" . }}
+  Chart Name: {{ include "chartName" . }}
+  ENV: {{ include "golangEnv" . }}
+{{- end }}
+
+
+{{ println "======Success=========" -}}

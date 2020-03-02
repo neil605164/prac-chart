@@ -1,0 +1,45 @@
+# pull image 用 token
+imagePullSecrets: private-registry
+
+# 環境變數
+env: ""
+
+# container 開的 port 名稱代號
+containerPortName: "nginx-port"
+
+# container 開的 port
+containerPort: 8080
+
+# readiness Pod 剛啟動時，要延遲幾秒再開始做 health check
+readInitialDelaySeconds: 5
+
+# readiness Pod 每隔幾秒訪問一次
+readPeriodSeconds: 60
+
+# liveness Pod 剛啟動時，要延遲幾秒再開始做 health check
+liveInitialDelaySeconds: 5
+
+# liveness Pod 每隔幾秒訪問一次
+liveperiodSeconds: 60
+
+# 服務檢查 route
+healthCheckPath: /frontend/healthz
+
+dev:
+  # image tag
+  tag: latest
+  # 服務對外網址
+  ingressHost: hello-go.local.com
+  # 服務對外網址 route (僅限制 DEV)
+  ingressPath: /
+  # image 存取網址
+  imageRepo: neil605164/
+  # image 名稱
+  image: golang-hello
+
+qa:
+  tag: latest
+  ingressHost: hello-go.qa.com
+  ingressPath: /
+  imageRepo: neil605164/
+  image: golang-hello

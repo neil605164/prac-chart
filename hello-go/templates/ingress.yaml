@@ -1,0 +1,14 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata: 
+  annotations:
+  name: {{ include "chartName" . }}-ingress
+spec:
+  rules:
+  - host: {{ include "ingressHost" . }}
+    http:
+      paths:
+      - path: {{ include "ingressPath" . }}
+        backend:
+          serviceName: {{ include "chartName" . }}-service
+          servicePort: {{ include "chartName" . }}

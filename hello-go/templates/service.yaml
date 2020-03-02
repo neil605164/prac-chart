@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: {{ include "chartName" . }}-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: {{ include "chartName" . }}-pod
+  ports:
+  - name: {{ include "chartName" . }}
+    port: 80
+    targetPort: {{ .Values.containerPort }}
